@@ -1,4 +1,8 @@
-const CACHE_NAME = 'overload-v20';
+/* Overload — service worker
+   Caches the app shell so it runs with no signal (e.g. at the park).
+   Bump CACHE_NAME whenever you upload a new index.html. */
+
+const CACHE_NAME = 'overload-v21';
 
 const ASSETS = [
   './',
@@ -9,6 +13,7 @@ const ASSETS = [
   './icon-maskable-512.png'
 ];
 
+// Install: pre-cache the app shell
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,6 +22,7 @@ self.addEventListener('install', event => {
   );
 });
 
+// Activate: clear out old caches from previous versions
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -27,6 +33,8 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Fetch: network-first so you always get the newest version when online,
+// falling back to cache when there's no connection.
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
