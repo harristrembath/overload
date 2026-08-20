@@ -2,7 +2,7 @@
    Caches the app shell so it runs with no signal (e.g. at the park).
    Bump CACHE_NAME whenever you upload a new index.html. */
 
-const CACHE_NAME = 'overload-v23';
+const CACHE_NAME = 'overload-v27';
 
 const ASSETS = [
   './',
